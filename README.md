@@ -66,9 +66,7 @@ RNF06
 
 O sistema deverá permitir a geração de relatórios para apoio ao gerenciamento da biblioteca.
 
-# Casos de Teste
-
-# Casos de Teste
+## Casos de Teste
 
 | ID   | Caso de Teste                             | Procedimento                                        | Resultado Esperado                                         | Resultado Obtido |
 | ---- | ----------------------------------------- | --------------------------------------------------- | ---------------------------------------------------------- | ---------------- |
