@@ -38,6 +38,8 @@ O sistema deve permitir visualizar os livros mais emprestados.
 
 RF09 – Consultar Livros Sem Estoque
 
+O sistema deve permitir visualizar os livros cuja quantidade disponível seja igual a zero.
+
 ## Requisitos Não Funcionais
 
 RNF01
@@ -63,6 +65,3 @@ O sistema deverá exibir mensagens de erro e validação quando operações inv�
 RNF06
 
 O sistema deverá permitir a geração de relatórios para apoio ao gerenciamento da biblioteca.
-
-
-O sistema deve permitir visualizar os livros cuja quantidade disponível seja igual a zero.
