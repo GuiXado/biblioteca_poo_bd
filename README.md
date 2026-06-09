@@ -1,5 +1,32 @@
 # biblioteca_poo_bd
 
+## Sistema de Biblioteca
+
+Projeto desenvolvido para a disciplina de Programação Orientada a Objetos e Banco de Dados.
+
+O sistema tem como objetivo realizar o gerenciamento de uma biblioteca, permitindo o cadastro de livros e estudantes, o controle de empréstimos e devoluções, além da geração de relatórios gerenciais.
+
+Entre as funcionalidades disponíveis estão:
+
+* Cadastro, consulta, alteração e exclusão de livros;
+* Cadastro, consulta, alteração e exclusão de estudantes;
+* Registro de empréstimos e devoluções;
+* Consulta de empréstimos ativos;
+* Consulta de empréstimos atrasados;
+* Consulta do histórico de empréstimos;
+* Relatório de estudantes com mais empréstimos;
+* Relatório de livros mais emprestados;
+* Relatório de livros sem estoque.
+
+Tecnologias utilizadas:
+
+- Java 21 para desenvolvimento da aplicação;
+- JavaFX para a interface gráfica;
+- JDBC para comunicação com o banco de dados;
+- SQL Server para persistência dos dados;
+- Gradle para gerenciamento e compilação do projeto.
+
+
 <img width="1312" height="367" alt="trabalho BD" src="https://github.com/user-attachments/assets/185c5996-a2be-46cf-ba72-67a22be7de97" />
 
 ## Requisitos Funcionais
