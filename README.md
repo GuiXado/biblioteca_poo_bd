@@ -112,6 +112,19 @@ O sistema deverá permitir a geração de relatórios para apoio ao gerenciament
 | CT13 | Consultar Livros Mais Emprestados         | Executar relatório correspondente                   | Exibir ranking de livros por quantidade de empréstimos     | Sucesso          |
 | CT14 | Consultar Livros Sem Estoque              | Executar relatório correspondente                   | Exibir apenas livros com quantidade igual a zero           | Sucesso          |
 
+## Banco de Dados
+
+O sistema utiliza o SQL Server para persistência dos dados.
+
+### Tabelas
+
+| Tabela     | Descrição                                          |
+| ---------- | -------------------------------------------------- |
+| Livro      | Armazena os dados dos livros cadastrados.          |
+| Estudante  | Armazena os dados dos estudantes cadastrados.      |
+| Emprestimo | Armazena os registros de empréstimos e devoluções. |
+
+O script completo de criação do banco de dados encontra-se no arquivo `database.sql`.
 
 
 ## Instruções de Execução
