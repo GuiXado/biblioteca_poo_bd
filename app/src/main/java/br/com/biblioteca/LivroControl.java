@@ -12,23 +12,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class LivroControl {
-
+    // cria a lista observável que armazena os livros exibidos na tabela
     ObservableList<Livro> lista = FXCollections.observableArrayList();
 
     IntegerProperty idLivro = new SimpleIntegerProperty(0);
-
     StringProperty titulo = new SimpleStringProperty("");
-
     StringProperty autor = new SimpleStringProperty("");
-
     StringProperty editora = new SimpleStringProperty("");
-
     ObjectProperty<LocalDate> dataPublicacao = new SimpleObjectProperty<>(LocalDate.now());
-
     IntegerProperty quantidade = new SimpleIntegerProperty(0);
-
+    
+    // instância do DAO para acessar o banco de cados, insntacia o LivroDAOImpl do tipo LivroDAO que é a interface
+    // por isso eu "chamo a inteface" e ela liga a implementação
     private LivroDAO dao = new LivroDAOImpl();
 
+    // contrutor já inicia com o metodo carregar()
     public LivroControl() {
         carregar();
     }
@@ -55,6 +53,7 @@ public class LivroControl {
         carregar();
     }
 
+    // carrega os livros do banco para a lista obervável
     public void carregar() {
         lista.clear();
         lista.addAll(dao.consultarPorTitulo(""));
@@ -75,6 +74,7 @@ public class LivroControl {
         carregar();
     }
 
+    // Transforma dados da interface em um objeto do sistema
     public Livro toEntity() {
         Livro livro = new Livro();
 
@@ -88,6 +88,7 @@ public class LivroControl {
         return livro;
     }
 
+    // Carrega dados de um objeto para a interface gráfica
     public void toBoundary(Livro livro) {
         if (livro != null) {
             idLivro.set(livro.getIdLivro());

@@ -20,25 +20,28 @@ import javafx.util.Callback;
 
 public class LivroBoundary implements Tela {
 
+    // campos de entrada para os dados do livro
     private TextField txtTitulo = new TextField();
     private TextField txtAutor = new TextField();
     private TextField txtEditora = new TextField();
+    private DatePicker dtaPublicacao = new DatePicker();
     private TextField txtQuantidade = new TextField();
 
-    private DatePicker dtaPublicacao = new DatePicker();
 
-    private LivroControl control = new LivroControl();
+    private LivroControl control = new LivroControl(); //instancia o controle para manipular os dados dos livros
 
     private TableView<Livro> table = new TableView<>();
 
     @Override
     public Pane render() {
-
+        //cria o container, painel principal, divide por regioes (top, left, center, right, bottom)
         BorderPane bp = new BorderPane();
+        // aqui crio os campo quase que como uma matriz
         GridPane paneCampos = new GridPane();
 
-        bp.setTop(paneCampos);
-        bp.setCenter(table);
+        bp.setTop(paneCampos); // logo, digo que em cima fica o paneCampo (minha matriz)
+        bp.setCenter(table); // no centro a tabela
+
 
         paneCampos.add(new Label("Título"), 0, 0);
         paneCampos.add(txtTitulo, 1, 0);
@@ -49,7 +52,7 @@ public class LivroBoundary implements Tela {
         paneCampos.add(new Label("Editora"), 0, 2);
         paneCampos.add(txtEditora, 1, 2);
 
-        paneCampos.add(new Label("Data Publicação"), 0, 3);
+        paneCampos.add(new Label("Data Publicação"), 0, 3); // se der dois espeços depois do texto é um jeito porco de afastar o textfiled do texto
         paneCampos.add(dtaPublicacao, 1, 3);
 
         paneCampos.add(new Label("Quantidade"), 0, 4);
@@ -59,7 +62,6 @@ public class LivroBoundary implements Tela {
         btnSalvar.setOnAction(e -> {
             control.salvar();
             control.limparCampos();
-
             new Alert(AlertType.INFORMATION,"Livro salvo com sucesso").show();
         });
 
@@ -72,9 +74,7 @@ public class LivroBoundary implements Tela {
         Button btnLimparCampos = new Button();
 
         try {
-            Image icon = new Image(
-                getClass().getResourceAsStream("/images/new.png")
-            );
+            Image icon = new Image(getClass().getResourceAsStream("/images/new.png"));
 
             ImageView imageView = new ImageView(icon);
             imageView.setFitHeight(20);
@@ -89,54 +89,34 @@ public class LivroBoundary implements Tela {
 
         paneCampos.add(btnLimparCampos, 2, 0);
 
+        // to ligando os campos com o controler, to dando acesso para o controler ver o que é digitado, tem haver com o que fiz em cima 
         Bindings.bindBidirectional(txtTitulo.textProperty(), control.titulo);
-
         Bindings.bindBidirectional(txtAutor.textProperty(), control.autor);
-
         Bindings.bindBidirectional(txtEditora.textProperty(), control.editora);
-
         Bindings.bindBidirectional(dtaPublicacao.valueProperty(), control.dataPublicacao);
-
         Bindings.bindBidirectional(txtQuantidade.textProperty(), control.quantidade, new javafx.util.converter.NumberStringConverter());
 
-        /*txtQuantidade.textProperty().addListener(
-            (obs, antigo, novo) -> {
-                try {
-                    control.quantidade.set(Integer.parseInt(novo));
-                } catch (Exception ex) {
-
-                }
-            }
-        );*/
-
+     
+        // Cria a coluna "Título" da tabela e define que ela exibirá
+        // o valor retornado pelo método getTitulo() de cada objeto Livro
         TableColumn<Livro, String> colTitulo = new TableColumn<>("Título");
-
-        colTitulo.setCellValueFactory(
-            itemData -> new ReadOnlyStringWrapper(itemData.getValue().getTitulo())
-        );
+        colTitulo.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getTitulo()));
 
         TableColumn<Livro, String> colAutor = new TableColumn<>("Autor");
-
-        colAutor.setCellValueFactory(
-            itemData -> new ReadOnlyStringWrapper(itemData.getValue().getAutor())
-        );
+        colAutor.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getAutor()));
 
         TableColumn<Livro, String> colEditora =  new TableColumn<>("Editora");
-
-        colEditora.setCellValueFactory(
-            itemData -> new ReadOnlyStringWrapper(itemData.getValue().getEditora())
-        );
+        colEditora.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getEditora()));
 
         TableColumn<Livro, String> colQuantidade = new TableColumn<>("Quantidade");
-
         colQuantidade.setCellValueFactory(
             itemData -> new ReadOnlyStringWrapper(
                 String.valueOf(itemData.getValue().getQuantidade())
             )
         );
 
+        // similar aos de cima, mas to criando um botão de acção da tabela, coluna "excluir", vou remover a linha do banco
         TableColumn<Livro, Void> colAcoes = new TableColumn<>("Ações");
-
         Callback<TableColumn<Livro, Void>,
                  TableCell<Livro, Void>> callBack = new Callback<>() {
 
@@ -147,10 +127,8 @@ public class LivroBoundary implements Tela {
 
                         private Button btnDelete = new Button("Excluir");
 
-                        {
-                            btnDelete.setOnAction(
-                                e -> control.apagar(getIndex())
-                            );
+                        { // isso aqui é assim mesmo, //é um bloco de inicialização do objeto, é executado quando a célula é criada, aqui eu defino a ação do botão
+                            btnDelete.setOnAction(e -> control.apagar(getIndex()));
                         }
 
                         @Override
@@ -172,8 +150,10 @@ public class LivroBoundary implements Tela {
 
         colAcoes.setCellFactory(callBack);
 
-        table.setItems(control.getLista());
+        // Associa a tabela à lista de livros do Control.
+        table.setItems(control.getLista()); 
 
+        // adiciona as colunas criadas à tabela
         table.getColumns().addAll(
             colTitulo,
             colAutor,
