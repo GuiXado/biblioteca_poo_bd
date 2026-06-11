@@ -139,7 +139,26 @@ public class EstudanteBoundary implements Tela {
 
                     private Button btnDelete = new Button("Excluir");
                     {
-                        btnDelete.setOnAction(e -> control.apagar(getIndex()));
+                        btnDelete.setOnAction(e -> {
+                            try {
+                                control.apagar(getIndex());
+
+                            } catch (Exception ex) {
+
+                                Alert alert = new Alert(Alert.AlertType.ERROR);
+                                alert.setTitle("Erro");
+
+                                if (ex.getMessage().equals("ESTUDANTE_COM_EMPRESTIMO")) {
+                                    alert.setContentText(
+                                        "Não é possível excluir: estudante possui empréstimo ativo."
+                                    );
+                                } else {
+                                    alert.setContentText(ex.getMessage());
+                                }
+
+                                alert.show();
+                            }
+                        });
                     }
 
                     @Override

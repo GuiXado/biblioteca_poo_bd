@@ -173,7 +173,26 @@ public class LivroBoundary implements Tela {
                         private Button btnDelete = new Button("Excluir");
 
                         { // isso aqui é assim mesmo, //é um bloco de inicialização do objeto, é executado quando a célula é criada, aqui eu defino a ação do botão
-                            btnDelete.setOnAction(e -> control.apagar(getIndex()));
+                           btnDelete.setOnAction(e -> {
+                                try {
+                                    control.apagar(getIndex());
+
+                                } catch (Exception ex) {
+
+                                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                                    alert.setTitle("Erro");
+
+                                    if (ex.getMessage().equals("LIVRO_COM_EMPRESTIMO")) {
+                                        alert.setContentText(
+                                            "Não é possível excluir: livro possui empréstimos vinculados."
+                                        );
+                                    } else {
+                                        alert.setContentText(ex.getMessage());
+                                    }
+
+                                    alert.show();
+                                }
+                            });
                         }
 
                         @Override

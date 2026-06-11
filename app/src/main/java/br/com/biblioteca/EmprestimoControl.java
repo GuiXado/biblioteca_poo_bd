@@ -53,16 +53,50 @@ public class EmprestimoControl {
 
         Emprestimo e = toEntity();
 
-        if (e.getIdEmprestimo() > 0) {
-            dao.atualizar(e.getIdEmprestimo(), e);
-        } else {
+        Livro livroSelecionado = e.getLivro();
+
+        LivroDAO livroDAO = new LivroDAOImpl();
+
+        // para emprestimo novo
+        if (e.getIdEmprestimo() == 0) {
+
+            if (livroSelecionado.getQuantidade() <= 0) {
+                return;
+            }
+
+            livroSelecionado.setQuantidade(
+                livroSelecionado.getQuantidade() - 1
+            );
+
+            livroDAO.atualizar(
+                livroSelecionado.getIdLivro(),
+                livroSelecionado
+            );
+
             dao.cadastrar(e);
         }
 
-        carregar();
-        //limparCampos(); to chamando no botão
+        // atualização e devolução
+        else {
 
-        //return "OK"; virou metodo de novo
+            if (e.getDataDevolucao() != null) {
+
+                livroSelecionado.setQuantidade(
+                    livroSelecionado.getQuantidade() + 1
+                );
+
+                livroDAO.atualizar(
+                    livroSelecionado.getIdLivro(),
+                    livroSelecionado
+                );
+            }
+
+            dao.atualizar(e.getIdEmprestimo(), e);
+        }
+
+        carregar();
+
+        //limparCampos(); to chamando no botão
     } 
 
     public void carregar() {
@@ -78,15 +112,17 @@ public class EmprestimoControl {
 
     public void apagar(int index) {
         Emprestimo e = lista.get(index);
-        Livro livro = e.getLivro();
+        
+        if (e.getDataDevolucao() == null) { // aqui ta a magica
 
-        if (livro != null) {
+            Livro livro = e.getLivro();
 
-            // devolve estoque
-            livro.setQuantidade(livro.getQuantidade() + 1);
+            if (livro != null) {
+                livro.setQuantidade(livro.getQuantidade() + 1);
 
-            LivroDAO livroDAO = new LivroDAOImpl();
-            livroDAO.atualizar(livro.getIdLivro(), livro);
+                LivroDAO livroDAO = new LivroDAOImpl();
+                livroDAO.atualizar(livro.getIdLivro(), livro);
+            }
         }
 
         // remove empréstimo
@@ -144,4 +180,16 @@ public class EmprestimoControl {
     public void pesquisar() {
         carregar();
     }
+
+    public boolean temEmprestimoPorLivro(int idLivro) {
+
+    for (Emprestimo e : lista) {
+        if (e.getLivro() != null &&
+            e.getLivro().getIdLivro() == idLivro) {
+            return true;
+        }
+    }
+
+    return false;
+}
 }

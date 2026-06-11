@@ -12,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class LivroControl {
+    private EmprestimoControl emprestimoControl = new EmprestimoControl();
     // cria a lista observável que armazena os livros exibidos na tabela
     ObservableList<Livro> lista = FXCollections.observableArrayList();
 
@@ -67,8 +68,11 @@ public class LivroControl {
     public void apagar(int index) {
         Livro livro = lista.get(index);
 
-        dao.apagar(livro.getIdLivro());
+        if (emprestimoControl.temEmprestimoPorLivro(livro.getIdLivro())) {
+            throw new RuntimeException("LIVRO_COM_EMPRESTIMO");
+        }
 
+        dao.apagar(livro.getIdLivro());
         carregar();
     }
 

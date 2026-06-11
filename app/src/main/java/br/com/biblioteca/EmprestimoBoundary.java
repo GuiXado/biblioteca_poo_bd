@@ -69,10 +69,11 @@ public class EmprestimoBoundary implements Tela {
             erros.append("Selecione um estudante.\n");
         }
 
-        if (dtaPrevista.getValue() == null) { // acho que fiz de enfeite essa primeira validação
-            erros.append("Data prevista é obrigatória.\n");
-        } else if (dtaPrevista.getValue().isBefore(java.time.LocalDate.now())) {
-            erros.append("Data prevista não pode ser anterior a hoje.\n");
+        if (dtaDevolucao.getValue() != null) {
+
+            if (dtaDevolucao.getValue().isAfter(LocalDate.now())) {
+                erros.append("Data de devolução não pode ser futura.\n");
+            }
         }
 
         if (erros.length() > 0) {

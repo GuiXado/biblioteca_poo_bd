@@ -9,6 +9,8 @@ import javafx.collections.ObservableList;
 
 public class EstudanteControl {
 
+    private EmprestimoControl emprestimoControl = new EmprestimoControl();
+
     ObservableList<Estudante> lista = FXCollections.observableArrayList();
 
     IntegerProperty idEstudante = new SimpleIntegerProperty(0);
@@ -23,6 +25,7 @@ public class EstudanteControl {
 
     public EstudanteControl() {
         carregar();
+        emprestimoControl.carregar();
     }
 
     public void limparCampos() {
@@ -60,10 +63,14 @@ public class EstudanteControl {
     }
 
     public void apagar(int index) {
+
         Estudante estudante = lista.get(index);
 
-        dao.apagar(estudante.getIdEstudante());
+        if (temEmprestimo(estudante.getIdEstudante())) {
+            throw new RuntimeException("ESTUDANTE_COM_EMPRESTIMO");
+        }
 
+        dao.apagar(estudante.getIdEstudante());
         carregar();
     }
 
@@ -89,6 +96,18 @@ public class EstudanteControl {
 
     public ObservableList<Estudante> getLista() {
         return lista;
+    }
+
+    private boolean temEmprestimo(int idEstudante) {
+
+        for (Emprestimo e : emprestimoControl.getLista()) {
+            if (e.getEstudante() != null &&
+                e.getEstudante().getIdEstudante() == idEstudante) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }
