@@ -49,48 +49,20 @@ public class EmprestimoControl {
         dataDevolucao.set(null);
     }
 
-    public String salvar() {
+    public void salvar() {
 
         Emprestimo e = toEntity();
 
-        Livro livroSelecionado = e.getLivro();
-
-        if (livroSelecionado == null) {
-            return "SELECIONE_LIVRO";
-        }
-
-        LivroDAO livroDAO = new LivroDAOImpl();
-
-        // NOVO EMPRÉSTIMO
-        if (e.getIdEmprestimo() == 0) {
-
-            if (livroSelecionado.getQuantidade() <= 0) {
-                return "SEM_ESTOQUE";
-            }
-
-            livroSelecionado.setQuantidade(livroSelecionado.getQuantidade() - 1);
-
-            livroDAO.atualizar(livroSelecionado.getIdLivro(),livroSelecionado);
-
-            dao.cadastrar(e);
-
-        } else {
-
-            // DEVOLUÇÃO
-            if (e.getDataDevolucao() != null) {
-
-                livroSelecionado.setQuantidade(livroSelecionado.getQuantidade() + 1);
-
-                livroDAO.atualizar(livroSelecionado.getIdLivro(),livroSelecionado);
-            }
-
+        if (e.getIdEmprestimo() > 0) {
             dao.atualizar(e.getIdEmprestimo(), e);
+        } else {
+            dao.cadastrar(e);
         }
 
         carregar();
-        limparCampos();
+        //limparCampos(); to chamando no botão
 
-        return "OK";
+        //return "OK"; virou metodo de novo
     } 
 
     public void carregar() {

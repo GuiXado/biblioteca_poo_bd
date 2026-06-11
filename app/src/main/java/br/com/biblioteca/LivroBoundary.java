@@ -59,7 +59,54 @@ public class LivroBoundary implements Tela {
         paneCampos.add(txtQuantidade, 1, 4);
 
         Button btnSalvar = new Button("Salvar");
+        // todas as validações ficaram no botão de salvar
         btnSalvar.setOnAction(e -> {
+            StringBuilder erros = new StringBuilder();
+
+            // AUTOR (não pode vazio + sem números)
+            String autor = txtAutor.getText();
+            if (autor == null || autor.trim().isEmpty()) {
+                erros.append("Autor não pode ser vazio.\n");
+            } else if (!autor.matches("[A-Za-zÀ-ÿ\\s]+")) {
+                erros.append("Autor não pode conter números ou caracteres inválidos.\n");
+            }
+
+            // DATA PUBLICAÇÃO (não pode ser futura)
+            if (dtaPublicacao.getValue() == null) {
+                erros.append("Data de publicação não pode ser vazia.\n");
+            } else if (dtaPublicacao.getValue().isAfter(java.time.LocalDate.now())) {
+                erros.append("Data de publicação não pode ser futura.\n");
+            }
+
+            // QUANTIDADE (somente número >= 0)
+            String qtdTexto = txtQuantidade.getText();
+
+            if (qtdTexto == null || qtdTexto.trim().isEmpty()) {
+                erros.append("Quantidade não pode ser vazia.\n");
+            } else {
+                try {
+                    int qtd = Integer.parseInt(qtdTexto);
+
+                    if (qtd < 0) {
+                        erros.append("Quantidade não pode ser negativa.\n");
+                    }
+
+                } catch (NumberFormatException ex) {
+                    erros.append("Quantidade deve ser um número inteiro.\n");
+                }
+            }
+
+            // SE TEM ERRO MOSTRA E NÃO SALVA
+            if (erros.length() > 0) {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Erro de validação");
+                alert.setHeaderText("Corrija os campos abaixo:");
+                alert.setContentText(erros.toString());
+                alert.show();
+                return;
+            }
+
+            // antes das validações só tinha esse trecho, mas salvava tudo errado
             control.salvar();
             control.limparCampos();
             new Alert(AlertType.INFORMATION,"Livro salvo com sucesso").show();
@@ -110,9 +157,7 @@ public class LivroBoundary implements Tela {
 
         TableColumn<Livro, String> colQuantidade = new TableColumn<>("Quantidade");
         colQuantidade.setCellValueFactory(
-            itemData -> new ReadOnlyStringWrapper(
-                String.valueOf(itemData.getValue().getQuantidade())
-            )
+            itemData -> new ReadOnlyStringWrapper(String.valueOf(itemData.getValue().getQuantidade()))
         );
 
         // similar aos de cima, mas to criando um botão de acção da tabela, coluna "excluir", vou remover a linha do banco

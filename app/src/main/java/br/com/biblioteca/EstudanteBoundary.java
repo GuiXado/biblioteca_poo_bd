@@ -47,6 +47,44 @@ public class EstudanteBoundary implements Tela {
 
         Button btnSalvar = new Button("Salvar");
         btnSalvar.setOnAction(e -> {
+
+            StringBuilder erros = new StringBuilder();
+
+            // NOME (obrigatório)
+            String nome = txtNome.getText();
+            if (nome == null || nome.trim().isEmpty()) {
+                erros.append("Nome não pode ser vazio.\n");
+            }
+
+            // TELEFONE
+            String telefone = txtTelefone.getText();
+
+            if (telefone != null && !telefone.trim().isEmpty()) { //verfica se nao é nulo ou vazio
+                if (!telefone.matches("\\d+")) { //verifica se tem só numeros
+                    erros.append("Telefone deve conter apenas números.\n");
+                }
+            }
+            // não precisa usar eu deixer ele como null
+            /*if (telefone == null || telefone.trim().isEmpty()) {
+                erros.append("Telefone não pode ser vazio.\n");
+            } else {
+                if (!telefone.matches("\\d+")) {
+                    erros.append("Telefone deve conter apenas números.\n");
+                }
+            }*/
+
+            // QUANDO APARECER ERRO
+            if (erros.length() > 0) {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Erro de validação");
+                alert.setHeaderText("Corrija os campos:");
+                alert.setContentText(erros.toString());
+                alert.show();
+                return;
+            }
+
+
+
             control.salvar();
             new Alert(AlertType.INFORMATION,"Estudante salvo com sucesso").show();
         });
@@ -78,27 +116,20 @@ public class EstudanteBoundary implements Tela {
         paneCampos.add(btnLimparCampos, 2, 0);
 
         Bindings.bindBidirectional(txtNome.textProperty(), control.nome);
-
         Bindings.bindBidirectional(txtCurso.textProperty(), control.curso);
-
         Bindings.bindBidirectional(txtTelefone.textProperty(), control.telefone);
 
         TableColumn<Estudante, String> colNome = new TableColumn<>("Nome");
-
         colNome.setCellValueFactory(item -> new ReadOnlyStringWrapper(item.getValue().getNome()));
 
         TableColumn<Estudante, String> colCurso = new TableColumn<>("Curso");
-
         colCurso.setCellValueFactory(item -> new ReadOnlyStringWrapper(item.getValue().getCurso()));
 
         TableColumn<Estudante, String> colTelefone = new TableColumn<>("Telefone");
-
         colTelefone.setCellValueFactory(item -> new ReadOnlyStringWrapper(item.getValue().getTelefone()));
 
         TableColumn<Estudante, Void> colAcoes = new TableColumn<>("Ações");
-
-        Callback<TableColumn<Estudante, Void>,
-                TableCell<Estudante, Void>> callBack = new Callback<>() {
+        Callback<TableColumn<Estudante, Void>, TableCell<Estudante, Void>> callBack = new Callback<>() {
 
             @Override
             public TableCell<Estudante, Void> call(

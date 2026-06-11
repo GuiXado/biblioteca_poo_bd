@@ -57,23 +57,34 @@ public class EmprestimoBoundary implements Tela {
 
         Button btnSalvar = new Button("Salvar");
         btnSalvar.setOnAction(e -> {
-        String resultado = control.salvar();
 
-        switch (resultado) {
+        StringBuilder erros = new StringBuilder();
 
-            case "OK":
-                control.limparCampos();
-                new Alert(Alert.AlertType.INFORMATION, "Empréstimo salvo com sucesso").show();
-                break;
-
-            case "SEM_ESTOQUE":
-                new Alert(Alert.AlertType.ERROR, "Livro sem estoque disponível").show();
-                break;
-
-            case "SELECIONE_LIVRO":
-                new Alert(Alert.AlertType.WARNING, "Selecione um livro").show();
-                break;
+        // validações...
+        if (cmbLivro.getValue() == null) {
+            erros.append("Selecione um livro.\n");
         }
+
+        if (cmbEstudante.getValue() == null) {
+            erros.append("Selecione um estudante.\n");
+        }
+
+        if (dtaPrevista.getValue() == null) { // acho que fiz de enfeite essa primeira validação
+            erros.append("Data prevista é obrigatória.\n");
+        } else if (dtaPrevista.getValue().isBefore(java.time.LocalDate.now())) {
+            erros.append("Data prevista não pode ser anterior a hoje.\n");
+        }
+
+        if (erros.length() > 0) {
+            new Alert(Alert.AlertType.ERROR, erros.toString()).show();
+            return;
+        }
+
+        // agora só chama
+        control.salvar();
+        control.limparCampos();
+
+        new Alert(Alert.AlertType.INFORMATION, "Empréstimo salvo com sucesso").show();
     });
 
         Button btnLimpar = new Button();
@@ -205,8 +216,7 @@ public class EmprestimoBoundary implements Tela {
             colAcoes
         );
 
-        table.getSelectionModel().selectedItemProperty()
-            .addListener((obs, antigo, novo) -> control.toBoundary(novo));
+        table.getSelectionModel().selectedItemProperty().addListener((obs, antigo, novo) -> control.toBoundary(novo));
 
         cmbLivro.setItems(control.getLivros());
         cmbEstudante.setItems(control.getEstudantes());

@@ -20,12 +20,12 @@ public class LivroDAOImpl implements LivroDAO {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             System.out.println("Classe carregada...");
             con = DriverManager.getConnection(DB_JDBC_URI, DB_USER, DB_PASS);
-            System.out.println("Conexao foi feita com sucesso");
+            System.out.println("Conexao foi feita com sucesso (livro DAOImpl)");
         } catch (ClassNotFoundException e) { 
-            System.out.println("Erro ao carregar a classe");
+            System.out.println("Erro ao carregar a classe (livro DAOImpl)");
             e.printStackTrace();
         } catch (SQLException e) {
-            System.out.println("Erro ao conectar");
+            System.out.println("Erro ao conectar (livro DAOImpl)");
             e.printStackTrace();
         }
     }
@@ -41,9 +41,9 @@ public class LivroDAOImpl implements LivroDAO {
             stm.setDate(4, java.sql.Date.valueOf(l.getDataPublicacao()));
             stm.setInt(5, l.getQuantidade());
             stm.executeUpdate();
-            System.out.println("Comando executado com sucesso"); 
+            System.out.println("Comando executado com sucesso (livro DAOImpl)"); 
         } catch (SQLException e) {
-            System.out.println("Erro ao conectar");
+            System.out.println("Erro ao conectar (livro DAOImpl)");
             e.printStackTrace();
         }
     }
@@ -67,9 +67,9 @@ public class LivroDAOImpl implements LivroDAO {
                 );
                 lista.add(livro);
             }
-            System.out.println("Comando executado com sucesso");   
+            System.out.println("Comando executado com sucesso (livro DAOImpl)");   
         } catch (SQLException e) {
-            System.out.println("Erro ao conectar");
+            System.out.println("Erro ao conectar (livro DAOImpl)");
             e.printStackTrace();
         }
         return lista;
@@ -87,9 +87,9 @@ public class LivroDAOImpl implements LivroDAO {
             stm.setInt(5, l.getQuantidade());
             stm.setLong(6, id);
             stm.executeUpdate();
-            System.out.println("Livro atualizado com sucesso"); 
+            System.out.println("Livro atualizado com sucesso (livro DAOImpl)"); 
         } catch (SQLException e) {
-            System.out.println("Erro ao conectar");
+            System.out.println("Erro ao conectar (livro DAOImpl)");
             e.printStackTrace();
         }
     }
@@ -101,9 +101,9 @@ public class LivroDAOImpl implements LivroDAO {
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setLong(1, id);
             stm.executeUpdate();
-            System.out.println("Livro apagado com sucesso"); 
+            System.out.println("Livro apagado com sucesso (livro DAOImpl)"); 
         } catch (SQLException e) {
-            System.out.println("Erro ao conectar");
+            System.out.println("Erro ao conectar (livro DAOImpl)");
             e.printStackTrace();
         }
     }

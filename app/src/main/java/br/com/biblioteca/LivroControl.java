@@ -49,7 +49,7 @@ public class LivroControl {
             dao.cadastrar(livro);
         }
 
-        limparCampos();
+        //limparCampos();
         carregar();
     }
 
@@ -61,9 +61,7 @@ public class LivroControl {
 
     public void pesquisar() {
         lista.clear();
-        lista.addAll(
-                dao.consultarPorTitulo(titulo.get())
-        );
+        lista.addAll(dao.consultarPorTitulo(titulo.get()));
     }
 
     public void apagar(int index) {
