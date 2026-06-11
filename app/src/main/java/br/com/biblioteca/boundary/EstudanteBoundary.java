@@ -1,5 +1,7 @@
-package br.com.biblioteca;
+package br.com.biblioteca.boundary;
 
+import br.com.biblioteca.control.EstudanteControl;
+import br.com.biblioteca.entity.Estudante;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.scene.control.Alert;
@@ -115,9 +117,9 @@ public class EstudanteBoundary implements Tela {
 
         paneCampos.add(btnLimparCampos, 2, 0);
 
-        Bindings.bindBidirectional(txtNome.textProperty(), control.nome);
-        Bindings.bindBidirectional(txtCurso.textProperty(), control.curso);
-        Bindings.bindBidirectional(txtTelefone.textProperty(), control.telefone);
+        Bindings.bindBidirectional(txtNome.textProperty(), control.nomeProperty());
+        Bindings.bindBidirectional(txtCurso.textProperty(), control.cursoProperty());
+        Bindings.bindBidirectional(txtTelefone.textProperty(), control.telefoneProperty());
 
         TableColumn<Estudante, String> colNome = new TableColumn<>("Nome");
         colNome.setCellValueFactory(item -> new ReadOnlyStringWrapper(item.getValue().getNome()));

@@ -1,7 +1,10 @@
-package br.com.biblioteca;
+package br.com.biblioteca.control;
 
 import java.time.LocalDate;
 
+import br.com.biblioteca.dao.LivroDAO;
+import br.com.biblioteca.dao.LivroDAOImpl;
+import br.com.biblioteca.entity.Livro;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -104,6 +107,26 @@ public class LivroControl {
 
     public ObservableList<Livro> getLista() {
         return lista;
+    }
+
+    public StringProperty tituloProperty() {
+        return titulo;
+    }
+
+    public StringProperty autorProperty() {
+        return autor;
+    }
+
+    public StringProperty editoraProperty() {
+        return editora;
+    }
+
+    public ObjectProperty<LocalDate> dataPublicacaoProperty() {
+        return dataPublicacao;
+    }
+
+    public IntegerProperty quantidadeProperty() {
+        return quantidade;
     }
 
 }

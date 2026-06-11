@@ -1,6 +1,8 @@
-package br.com.biblioteca;
+package br.com.biblioteca.dao;
 
 import java.util.List;
+
+import br.com.biblioteca.entity.Emprestimo;
 
 public interface EmprestimoDAO {
     void cadastrar(Emprestimo e);

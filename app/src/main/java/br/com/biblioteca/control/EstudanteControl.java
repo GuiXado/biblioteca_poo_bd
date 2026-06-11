@@ -1,5 +1,9 @@
-package br.com.biblioteca;
+package br.com.biblioteca.control;
 
+import br.com.biblioteca.dao.EstudanteDAO;
+import br.com.biblioteca.dao.EstudanteDAOImpl;
+import br.com.biblioteca.entity.Emprestimo;
+import br.com.biblioteca.entity.Estudante;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -108,6 +112,18 @@ public class EstudanteControl {
         }
 
         return false;
+    }
+
+    public StringProperty nomeProperty() {
+        return nome;
+    }
+
+    public StringProperty cursoProperty() {
+        return curso;
+    }
+
+    public StringProperty telefoneProperty() {
+        return telefone;
     }
 
 }

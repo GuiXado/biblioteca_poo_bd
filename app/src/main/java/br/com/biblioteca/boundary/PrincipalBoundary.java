@@ -1,4 +1,4 @@
-package br.com.biblioteca;
+package br.com.biblioteca.boundary;
 
 import javafx.application.Application;
 import javafx.scene.Scene;

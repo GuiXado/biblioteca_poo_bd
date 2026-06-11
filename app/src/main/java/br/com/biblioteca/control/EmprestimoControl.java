@@ -1,7 +1,16 @@
-package br.com.biblioteca;
+package br.com.biblioteca.control;
 
 import java.time.LocalDate;
 
+import br.com.biblioteca.dao.EmprestimoDAO;
+import br.com.biblioteca.dao.EmprestimoDAOImpl;
+import br.com.biblioteca.dao.EstudanteDAO;
+import br.com.biblioteca.dao.EstudanteDAOImpl;
+import br.com.biblioteca.dao.LivroDAO;
+import br.com.biblioteca.dao.LivroDAOImpl;
+import br.com.biblioteca.entity.Emprestimo;
+import br.com.biblioteca.entity.Estudante;
+import br.com.biblioteca.entity.Livro;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -95,7 +104,7 @@ public class EmprestimoControl {
         }
 
         carregar();
-
+       
         //limparCampos(); to chamando no botão
     } 
 
@@ -183,13 +192,29 @@ public class EmprestimoControl {
 
     public boolean temEmprestimoPorLivro(int idLivro) {
 
-    for (Emprestimo e : lista) {
-        if (e.getLivro() != null &&
-            e.getLivro().getIdLivro() == idLivro) {
-            return true;
+        for (Emprestimo e : lista) {
+            if (e.getLivro() != null &&
+                e.getLivro().getIdLivro() == idLivro) {
+                return true;
+            }
         }
+
+        return false;
     }
 
-    return false;
-}
+    public ObjectProperty<Livro> livroProperty() {
+        return livro;
+    }
+
+    public ObjectProperty<Estudante> estudanteProperty() {
+        return estudante;
+    }
+
+    public ObjectProperty<LocalDate> dataPrevistaProperty() {
+        return dataPrevista;
+    }
+
+    public ObjectProperty<LocalDate> dataDevolucaoProperty() {
+        return dataDevolucao;
+    }
 }

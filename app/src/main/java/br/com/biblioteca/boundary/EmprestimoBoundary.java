@@ -1,8 +1,12 @@
-package br.com.biblioteca;
+package br.com.biblioteca.boundary;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import br.com.biblioteca.control.EmprestimoControl;
+import br.com.biblioteca.entity.Emprestimo;
+import br.com.biblioteca.entity.Estudante;
+import br.com.biblioteca.entity.Livro;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.scene.control.*;
@@ -104,12 +108,12 @@ public class EmprestimoBoundary implements Tela {
         paneCampos.add(btnSalvar, 0, 5);
         paneCampos.add(btnLimpar, 1, 5);
 
-        Bindings.bindBidirectional(cmbLivro.valueProperty(), control.livro);
-        Bindings.bindBidirectional(cmbEstudante.valueProperty(), control.estudante);
+        Bindings.bindBidirectional(cmbLivro.valueProperty(), control.livroProperty());
+        Bindings.bindBidirectional(cmbEstudante.valueProperty(), control.estudanteProperty());
 
         //Bindings.bindBidirectional(dtaEmprestimo.valueProperty(), control.dataEmprestimo);
-        Bindings.bindBidirectional(dtaPrevista.valueProperty(), control.dataPrevista);
-        Bindings.bindBidirectional(dtaDevolucao.valueProperty(), control.dataDevolucao);
+        Bindings.bindBidirectional(dtaPrevista.valueProperty(), control.dataPrevistaProperty());
+        Bindings.bindBidirectional(dtaDevolucao.valueProperty(), control.dataDevolucaoProperty());
 
         cmbLivro.setConverter(new javafx.util.StringConverter<Livro>() {
 

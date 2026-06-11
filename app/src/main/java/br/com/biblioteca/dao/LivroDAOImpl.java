@@ -1,4 +1,4 @@
-package br.com.biblioteca;
+package br.com.biblioteca.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
+import br.com.biblioteca.entity.Livro;
 
 public class LivroDAOImpl implements LivroDAO {
     private static final String DB_JDBC_URI = "jdbc:sqlserver://localhost:1433;databaseName=biblioteca;encrypt=true;trustServerCertificate=true;";

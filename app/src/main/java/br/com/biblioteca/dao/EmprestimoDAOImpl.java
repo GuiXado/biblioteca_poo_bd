@@ -1,4 +1,4 @@
-package br.com.biblioteca;
+package br.com.biblioteca.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +7,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
+import br.com.biblioteca.entity.Emprestimo;
+import br.com.biblioteca.entity.Estudante;
+import br.com.biblioteca.entity.Livro;
+
 import java.time.LocalDate;
 
 public class EmprestimoDAOImpl implements EmprestimoDAO {

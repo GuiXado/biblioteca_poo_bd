@@ -1,5 +1,7 @@
-package br.com.biblioteca;
+package br.com.biblioteca.boundary;
 
+import br.com.biblioteca.control.LivroControl;
+import br.com.biblioteca.entity.Livro;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.scene.control.Alert;
@@ -137,11 +139,11 @@ public class LivroBoundary implements Tela {
         paneCampos.add(btnLimparCampos, 2, 0);
 
         // to ligando os campos com o controler, to dando acesso para o controler ver o que é digitado, tem haver com o que fiz em cima 
-        Bindings.bindBidirectional(txtTitulo.textProperty(), control.titulo);
-        Bindings.bindBidirectional(txtAutor.textProperty(), control.autor);
-        Bindings.bindBidirectional(txtEditora.textProperty(), control.editora);
-        Bindings.bindBidirectional(dtaPublicacao.valueProperty(), control.dataPublicacao);
-        Bindings.bindBidirectional(txtQuantidade.textProperty(), control.quantidade, new javafx.util.converter.NumberStringConverter());
+        Bindings.bindBidirectional(txtTitulo.textProperty(), control.tituloProperty());
+        Bindings.bindBidirectional(txtAutor.textProperty(), control.autorProperty());
+        Bindings.bindBidirectional(txtEditora.textProperty(), control.editoraProperty());
+        Bindings.bindBidirectional(dtaPublicacao.valueProperty(), control.dataPublicacaoProperty());
+        Bindings.bindBidirectional(txtQuantidade.textProperty(), control.quantidadeProperty(), new javafx.util.converter.NumberStringConverter());
 
      
         // Cria a coluna "Título" da tabela e define que ela exibirá

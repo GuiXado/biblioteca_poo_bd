@@ -1,4 +1,4 @@
-package br.com.biblioteca;
+package br.com.biblioteca.entity;
 
 public class RelatorioItem {
 

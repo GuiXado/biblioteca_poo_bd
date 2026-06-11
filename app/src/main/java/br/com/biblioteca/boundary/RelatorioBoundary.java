@@ -1,7 +1,8 @@
-package br.com.biblioteca;
+package br.com.biblioteca.boundary;
 
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import br.com.biblioteca.control.RelatorioControl;
 import javafx.collections.FXCollections;
 
 public class RelatorioBoundary implements Tela {

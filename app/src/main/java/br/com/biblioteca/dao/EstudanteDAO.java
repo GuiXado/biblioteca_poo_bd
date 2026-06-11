@@ -1,6 +1,8 @@
-package br.com.biblioteca;
+package br.com.biblioteca.dao;
 
 import java.util.List;
+
+import br.com.biblioteca.entity.Estudante;
 
 public interface EstudanteDAO {
     void cadastrar(Estudante e);

@@ -3,6 +3,7 @@
  */
 package br.com.biblioteca;
 
+import br.com.biblioteca.boundary.PrincipalBoundary;
 import javafx.application.Application;
 
 public class App {

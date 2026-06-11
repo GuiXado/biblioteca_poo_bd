@@ -1,5 +1,7 @@
-package br.com.biblioteca;
+package br.com.biblioteca.control;
 
+import br.com.biblioteca.dao.RelatorioDAO;
+import br.com.biblioteca.dao.RelatorioDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
