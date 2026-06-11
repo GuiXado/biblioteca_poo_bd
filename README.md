@@ -2,6 +2,12 @@
 
 ## Sistema de Biblioteca
 
+Guilherme Machado da Silva
+
+Sistema de gerenciamento de biblioteca com controle de empréstimos, estudantes e acervo de livros.
+
+Video explicativo: https://youtu.be/EovjCCF6HkI
+
 Projeto desenvolvido para a disciplina de Programação Orientada a Objetos e Banco de Dados.
 
 O sistema tem como objetivo realizar o gerenciamento de uma biblioteca, permitindo o cadastro de livros e estudantes, o controle de empréstimos e devoluções, além da geração de relatórios gerenciais.
