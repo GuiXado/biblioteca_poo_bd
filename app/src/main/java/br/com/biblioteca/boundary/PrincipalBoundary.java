@@ -37,7 +37,7 @@ public class PrincipalBoundary extends Application {
         Menu mnuCadastro = new Menu("Cadastros");
         Menu mnuEmprestimo = new Menu("Empréstimos");
         Menu mnuRelatorio = new Menu("Relatórios");
-        Menu mnuAjuda = new Menu("Ajuda"); // talvez eu ainda coloque o ajuda
+        //Menu mnuAjuda = new Menu("Ajuda"); // talvez eu ainda coloque o ajuda
 
         // adicionando os menus na barra de menu
         menuBar.getMenus().addAll(mnuCadastro, mnuEmprestimo, mnuRelatorio);

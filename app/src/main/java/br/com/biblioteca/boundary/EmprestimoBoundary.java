@@ -36,6 +36,7 @@ public class EmprestimoBoundary implements Tela {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Pane render() {
 
         BorderPane bp = new BorderPane();

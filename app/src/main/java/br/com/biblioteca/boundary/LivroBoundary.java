@@ -35,6 +35,7 @@ public class LivroBoundary implements Tela {
     private TableView<Livro> table = new TableView<>();
 
     @Override
+    @SuppressWarnings("unchecked")
     public Pane render() {
         //cria o container, painel principal, divide por regioes (top, left, center, right, bottom)
         BorderPane bp = new BorderPane();

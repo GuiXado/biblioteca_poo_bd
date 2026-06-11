@@ -30,6 +30,7 @@ public class EstudanteBoundary implements Tela {
     private TableView<Estudante> table = new TableView<>();
 
     @Override
+    @SuppressWarnings("unchecked")
     public Pane render() {
 
         BorderPane bp = new BorderPane();

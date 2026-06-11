@@ -24,7 +24,9 @@ public class RelatorioBoundary implements Tela {
         
         //para tentar deixar a tabela maior
         //bp.setPrefSize(1000, 700);
-        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        //deprecated
+        //table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY); //deprecated
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS); 
 
         cmbTipo.setItems(FXCollections.observableArrayList(
             "Empréstimos ativos",
